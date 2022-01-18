@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record model="ir.ui.view" id="product_template_hs_code">
+        <field name="name">product.template.form.hs_code</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_general']" position="inside">
+                <field name="hs_code" required="1"/>
+                <field name="hs_type" required="1" options="{'horizontal': true}" widget="radio"/>
+                <field name="hs_description" required="1"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

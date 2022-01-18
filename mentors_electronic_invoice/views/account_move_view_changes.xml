@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Invoice -->
+        <record id="e_invoice_view_move_form_inherit" model="ir.ui.view">
+            <field name="name">e_invoice.account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='preview_invoice']" position="before">
+                    <field name="e_invoice_sent" invisible="1"/>
+                    <field name="hide_sent_button" invisible="1"/>
+                    <field name="e_invoice_valid" invisible="1"/>
+                    <field name="e_invoice_invalid" invisible="1"/>
+                    <field name="e_invoice_submitted" invisible="1"/>
+                    <field name="e_invoice_sent" invisible="1"/>
+                    <button type="object" class="btn btn-warning"
+                            icon="fa-paper-plane" string="Send E-Invoice"
+                            name="action_send_electronic_invoice" attrs="{'invisible':['|','|',('hide_sent_button','=',True),
+                            ('state','!=','posted'),('type','not in',('out_invoice', 'out_refund'))]}"/>
+                </xpath>
+                <xpath expr="//widget" position="before">
+                    <widget name="web_ribbon" title="E-Inv Valid" bg_color="bg-success" style="margin-top:40px;"
+                            attrs="{'invisible': [('e_invoice_valid', '!=', True)]}" />
+                    <widget name="web_ribbon" title="E-Inv Invalid" bg_color="bg-danger" style="margin-top:40px;"
+                            attrs="{'invisible': [('e_invoice_invalid', '!=', True)]}" />
+                    <widget name="web_ribbon" title="E-Inv Submitted" bg_color="bg-primary" style="margin-top:40px;"
+                            attrs="{'invisible': [('e_invoice_submitted', '!=', True)]}" />
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="E-Invoice Details"
+                          attrs="{'invisible': ['|',('state','!=','posted'),('type','not in',('out_invoice', 'out_refund'))]}">
+                        <header  attrs="{'invisible': [('e_invoice_valid','=',True)]}">
+                            <button type="object" name="action_generate_json" string="Generate Json"
+                                    icon="fa-cogs" class="btn btn-dark"/>
+                            <button type="object" name="action_sign_invoice" string="Sign Document"
+                                    icon="fa-edit" class="btn btn-dark"/>
+                        </header>
+                        <group>
+                            <group>
+                                <field name="show_results"/>
+                                <field name="invoice_signed" readonly="1" force_save="1"/>
+                                <field name="use_static_signature"  attrs="{'readonly': [('e_invoice_valid','=',True)]}"/>
+                                <label for="static_sign_url" attrs="{'invisible':[('use_static_signature','=',False)]}"/>
+                                <div class="o_row" attrs="{'invisible':[('use_static_signature','=',False)]}">
+                                    <field name="static_sign_url" widget="url"/>
+                                    <button type="object" name="get_static_sign_url"
+                                            icon="fa-refresh" class="btn btn-dark"/>
+                                </div>
+                                <label for="static_signature" attrs="{'invisible':[('use_static_signature','=',False)]}"/>
+                                <field name="static_signature" class="oe_edit_only" nolabel="1"
+                                       attrs="{'invisible':[('use_static_signature','=',False)],'readonly': [('e_invoice_valid','=',True)]}"/>
+                            </group>
+                            <group>
+                                <field name="electronic_invoice_date" readonly="1" force_save="1"/>
+                                <field name="electronic_invoice_uuid" readonly="1" force_save="1"/>
+                                <field name="electronic_invoice_url" widget="url"  force_save="1" readonly="1"/>
+                                <label for="electronic_invoice_pdf"/>
+                                <div class="o_row">
+                                    <field name="pdf_name" invisible="1"/>
+                                    <field name="electronic_invoice_pdf" readonly="1" force_save="1" filename="pdf_name"/>
+                                    <button type="object" class="btn btn-info"
+                                            icon="fa-refresh" string="Update PDF"
+                                            name="action_update_electronic_invoice_pdf"
+                                            attrs="{'invisible':[('electronic_invoice_uuid','=',False)]}"/>
+                                </div>
+                                <label for="electronic_invoice_status"/>
+                                <div class="o_row">
+                                    <field name="electronic_invoice_status" readonly="1" force_save="1"/>
+                                    <button type="object" class="btn btn-info" context="{'show_result':1}"
+                                            icon="fa-refresh" string="Update Status"
+                                            name="action_update_electronic_invoice_status"
+                                            attrs="{'invisible':[('electronic_invoice_uuid','=',False)]}"/>
+                                </div>
+                            </group>
+                            <label for="e_invoice_canonical" groups="mentors_electronic_invoice.group_e_invoice_dev_tools"
+                                   style="font-weight:bold"/>
+                            <field name="e_invoice_canonical" readonly="1"
+                                   groups="mentors_electronic_invoice.group_e_invoice_dev_tools"/>
+                            <label for="e_invoice_json" groups="mentors_electronic_invoice.group_e_invoice_dev_tools"
+                                   style="font-weight:bold;"/>
+                            <field name="e_invoice_json" readonly="1"
+                                   groups="mentors_electronic_invoice.group_e_invoice_dev_tools"/>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+        <!-- Taxes -->
+        <record id="e_invoice_view_tax_form_inherit" model="ir.ui.view">
+            <field name="name">e_invoice.account.tax.form.inherit</field>
+            <field name="model">account.tax</field>
+            <field name="inherit_id" ref="account.view_tax_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='type_tax_use']" position="after">
+                    <field name="type_code_id"/>
+                    <field name="sub_type_code_id"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

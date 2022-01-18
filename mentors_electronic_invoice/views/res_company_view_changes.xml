@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="e_invoice_res_company_form_view_inherit" model="ir.ui.view">
+        <field name="name">e.invoice.res.company.form</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <page string="Taxes API" groups="base.group_no_one">
+                    <group>
+                        <group>
+                            <field name="config_type" options="{'horizontal': true}" widget="radio"/>
+                            <!--<field name="invoice_version" options="{'horizontal': true}" widget="radio"/>-->
+                            <field name="client_id" password="True"/>
+                            <field name="client_secret"  password="True"/>
+                            <field name="taxpayer_activity_code"/>
+                            <field name="default_type_code_id"/>
+                            <field name="default_sub_type_code_id"/>
+                            <label for="method" string="Test API"/>
+                            <div class="o_row">
+                                <field name="method"/>
+                                <button type="object" class="btn btn-info"
+                                        icon="fa-cogs" string="Send Request"
+                                        name="test_call_e_invoice_api" />
+                            </div>
+                        </group>
+                        <group>
+                            <widget name="web_ribbon" title="PRODUCTION" bg_color="bg-success"
+                                    attrs="{'invisible': [('config_type', '!=', 'prod')]}" />
+                            <widget name="web_ribbon" title="UAT/PREPROD" bg_color="bg-warning"
+                                    attrs="{'invisible': [('config_type', '!=', 'uat')]}" />
+                            <widget name="web_ribbon" title="SIT" bg_color="bg-info"
+                                    attrs="{'invisible': [('config_type', '!=', 'sit')]}" />
+                        </group>
+                    </group>
+                    <group string="Signature" attrs="{'invisible':[('config_type','!=','prod')]}">
+                        <group>
+                            <field name="signature_tool" options="{'horizontal': true}" widget="radio"/>
+                            <field name="signature_url" widget="url" attrs="{'invisible': [('signature_tool', '!=', 'python')]}"/>
+                            <field name="signature_serializer" widget="url" attrs="{'invisible': [('signature_tool', '!=', 'c#')]}"/>
+                            <field name="signature_hash" widget="url" attrs="{'invisible': [('signature_tool', '!=', 'c#')]}"/>
+                            <field name="signature_pin" />
+                            <field name="signature_label"/>
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

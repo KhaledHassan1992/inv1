@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <!--  T1-->
+        <record id="account_tax_type_1" model="account.tax.type.code">
+            <field name="name">تصدير للخارج</field>
+            <field name="code">T1</field>
+            <field name="taxable">1</field>
+        </record>
+        <record id="account_tax_sub_type_1" model="account.tax.sub.type.code">
+            <field name="name">تصدير للخارج</field>
+            <field name="code">V001</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_1"/>
+        </record>
+        <record id="account_tax_sub_type_2" model="account.tax.sub.type.code">
+            <field name="name">تصدير مناطق حرة وأخرى</field>
+            <field name="code">V002</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_1"/>
+        </record>
+        <record id="account_tax_sub_type_3" model="account.tax.sub.type.code">
+            <field name="name">سلعة أو خدمة معفاة</field>
+            <field name="code">V003</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_1"/>
+
+        </record>
+        <record id="account_tax_sub_type_4" model="account.tax.sub.type.code">
+            <field name="name">سلعة أو خدمة غير خاضعة للضريبة</field>
+            <field name="code">V004</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_1"/>
+        </record>
+        <!--  T2-->
+        <record id="account_tax_type_2" model="account.tax.type.code">
+            <field name="name">ضريبه الجدول (نسبيه)</field>
+            <field name="code">T2</field>
+            <field name="taxable">1</field>
+        </record>
+        <record id="account_tax_sub_type_5" model="account.tax.sub.type.code">
+            <field name="name">ضريبه الجدول (نسبيه)</field>
+            <field name="code">Tbl01</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_2"/>
+        </record>
+        <!--  T3-->
+        <record id="account_tax_type_3" model="account.tax.type.code">
+            <field name="name">ضريبه الجدول (النوعية)</field>
+            <field name="code">T3</field>
+            <field name="taxable">1</field>
+        </record>
+        <record id="account_tax_sub_type_6" model="account.tax.sub.type.code">
+            <field name="name">ضريبه الجدول (النوعية)</field>
+            <field name="code">Tbl02</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_3"/>
+        </record>
+        <!--  T4-->
+        <record id="account_tax_type_4" model="account.tax.type.code">
+            <field name="name">الخصم تحت حساب الضريبه</field>
+            <field name="code">T4</field>
+            <field name="taxable">1</field>
+        </record>
+        <record id="account_tax_sub_type_7" model="account.tax.sub.type.code">
+            <field name="name">المقاولات</field>
+            <field name="code">W001</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_4"/>
+        </record>
+        <record id="account_tax_sub_type_8" model="account.tax.sub.type.code">
+            <field name="name">التوريدات</field>
+            <field name="code">W002</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_4"/>
+        </record>
+        <!--  T4-->
+        <record id="account_tax_type_5" model="account.tax.type.code">
+            <field name="name">ضريبه الدمغه (نسبيه)</field>
+            <field name="code">T5</field>
+            <field name="taxable">1</field>
+        </record>
+        <record id="account_tax_sub_type_9" model="account.tax.sub.type.code">
+            <field name="name">ضريبه الدمغه (نسبيه)	</field>
+            <field name="code">ST01</field>
+            <field name="type_id" ref="mentors_electronic_invoice.account_tax_type_5"/>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_tax_type_code_user,account.tax.type.code.user,model_account_tax_type_code,account.group_account_user,1,0,0,0
+access_account_tax_type_code_manager,account.tax.type.code.manager,model_account_tax_type_code,account.group_account_manager,1,1,1,1
+access_account_tax_sub_type_code_user,account.tax.sub.type.code.user,model_account_tax_sub_type_code,account.group_account_user,1,0,0,0
+access_account_tax_sub_type_code_manager,account.tax.sub.type.code.manager,model_account_tax_sub_type_code,account.group_account_manager,1,1,1,1
+access_electronic_invoice_result_user,electronic.invoice.result.user,model_electronic_invoice_result,base.group_user,1,1,1,1
+access_electronic_invoice_result_line_user,electronic.invoice.result.line.user,model_electronic_invoice_result_line,base.group_user,1,1,1,1

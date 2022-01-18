@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="e_invoice_view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">e.invoice.res.partner.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='company_type']" position="after">
+                <field name="customer_rank" invisible="1"/>
+                <field name="supplier_rank" invisible="1"/>
+                <field name="classification" widget="radio"
+                       attrs="{'invisible':[('supplier_rank','!=',0)]}" options="{'horizontal': true}"/>
+            </xpath>
+            <xpath expr="//field[@name='street2']" position="replace">
+                <field name="street2" placeholder="Building No." class="o_address_city"/>
+                <field name="floor" placeholder="Floor" class="o_address_city"/>
+                <field name="room" placeholder="Room" class="o_address_city"/>
+                <field name="landmark" placeholder="Landmark" class="o_address_city"/>
+                <field name="additional_info" placeholder="Additional Information..." class="o_address_country"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="e_invoice_res_partner_view_search_inherjit" model="ir.ui.view">
+        <field name="name">e.invoice.res.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group" position="inside">
+                <separator/>
+                <filter name="classification" string="Customer Classification"
+                        domain="[]" context="{'group_by' : 'classification'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
